@@ -1,0 +1,2 @@
+public class DefensiveEquipment {
+}
