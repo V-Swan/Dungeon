@@ -15,8 +15,6 @@ public class Equipment {
 
     @Override
     public String toString() {
-        return "Equipment{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
