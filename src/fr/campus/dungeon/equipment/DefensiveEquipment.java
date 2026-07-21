@@ -1,4 +1,4 @@
-package fr.campus.dungeon;
+package fr.campus.dungeon.equipment;
 
 public class DefensiveEquipment {
 }
