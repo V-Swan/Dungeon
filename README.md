@@ -1,0 +1,1 @@
+Le modèle Equipment suit les contraintes de l'exercice. Dans une architecture plus avancée, les consommables pourraient être séparés des équipements défensifs afin de mieux représenter leurs comportements différents.
