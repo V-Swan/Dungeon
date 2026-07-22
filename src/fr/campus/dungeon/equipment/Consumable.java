@@ -20,5 +20,3 @@ public class Consumable extends Equipment{
                 " +" + healingValue + " point de vie";
     }
 }
-Consumable potion = new Consumable("Petite potion", 5);
-Consumable bigPotion = new Consumable("Grande potion", 10);
