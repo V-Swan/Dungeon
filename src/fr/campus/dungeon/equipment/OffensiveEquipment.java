@@ -2,7 +2,7 @@ package fr.campus.dungeon.equipment;
 
 
 
-public class OffensiveEquipment extends Equipment {
+public abstract class OffensiveEquipment extends Equipment {
     private int bonusAttack;
 
     public OffensiveEquipment(String name, int bonusAttack){
