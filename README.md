@@ -6,18 +6,14 @@ Le sujet initial proposait une organisation simple des équipements avec les cla
 
 La structure a été adaptée de la manière suivante :
 
-Equipment
-│
-├── OffensiveEquipment (abstract)
-│ │
-│ ├── Weapon
-│ └── Spell
-│
-├── DefensiveEquipment (abstract)
-│ │
-│ └── Shield
-│
-└── Consumable
+
+- `Equipment`
+  - `OffensiveEquipment` (classe abstraite)
+    - `Weapon`
+    - `Spell`
+  - `DefensiveEquipment` (classe abstraite)
+    - `Shield`
+  - `Consumable`
 
 
 Les classes `Weapon`, `Spell` et `Shield` héritent de leurs classes parentes afin de permettre une meilleure distinction des types d'équipements et de préparer les futures interactions entre personnages et objets.
