@@ -17,6 +17,6 @@ public class Consumable extends Equipment{
     @Override
     public String toString() {
         return super.toString() +
-                " + " + healingValue + " point de vie";
+                " +" + healingValue + " point de vie";
     }
 }
