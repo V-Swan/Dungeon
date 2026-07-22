@@ -1,19 +1,41 @@
-## Ajout d'une classe `Consumable`
+## Organisation du code et choix d'architecture
 
-Le sujet regroupe les boucliers et les potions dans `DefensiveEquipment`, mais ces objets ont des comportements différents.
+Le sujet initial proposait une organisation simple des équipements avec les classes `OffensiveEquipment` et `DefensiveEquipment`. J'ai choisi de faire évoluer cette structure afin de mieux représenter les responsabilités de chaque objet.
 
-J'ai choisi de créer une classe `Consumable` pour séparer les objets équipables (comme les boucliers) des objets utilisables une seule fois (comme les potions).
+### Hiérarchie des équipements
 
-Cette séparation respecte le principe de responsabilité unique et facilite l'ajout de nouveaux objets consommables dans les futures itérations.
+La structure a été adaptée de la manière suivante :
 
-Structure :
-
-```
 Equipment
 │
-├── OffensiveEquipment
-├── DefensiveEquipment
+├── OffensiveEquipment (abstract)
+│ │
+│ ├── Weapon
+│ └── Spell
+│
+├── DefensiveEquipment (abstract)
+│ │
+│ └── Shield
+│
 └── Consumable
-```
 
-Les équipements récupérés sont stockés dans l'inventaire indépendamment de leur compatibilité avec la classe du personnage. La compatibilité est vérifiée uniquement lors de l'équipement.
+
+Les classes `Weapon`, `Spell` et `Shield` héritent de leurs classes parentes afin de permettre une meilleure distinction des types d'équipements et de préparer les futures interactions entre personnages et objets.
+
+### Pourquoi cette modification ?
+
+Le sujet demandait initialement de différencier les équipements principalement grâce à leur type. J'ai choisi d'utiliser l'héritage à la place afin de profiter davantage des concepts de la programmation orientée objet :
+
+- chaque classe possède une responsabilité claire ;
+- le type d'un objet est directement représenté par sa classe ;
+- l'utilisation du polymorphisme sera facilitée pour les futures interactions du jeu.
+
+Par exemple, un personnage pourra facilement différencier une arme d'un sort grâce au type de l'objet :
+
+Weapon → équipement physique
+Spell → équipement magique
+Shield → équipement défensif
+Consumable → objet utilisable
+
+
+Cette organisation permettra également d'ajouter plus facilement de nouveaux objets dans les futures itérations (nouvelles armes, sorts, potions ou équipements spécifiques).
