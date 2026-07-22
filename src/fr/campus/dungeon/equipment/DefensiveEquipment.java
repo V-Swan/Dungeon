@@ -1,6 +1,6 @@
 package fr.campus.dungeon.equipment;
 
-public class DefensiveEquipment extends Equipment{
+public abstract class DefensiveEquipment extends Equipment{
 
         private int damageReduction;
 
