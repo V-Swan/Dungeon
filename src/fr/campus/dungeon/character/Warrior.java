@@ -7,14 +7,14 @@ public class Warrior extends PlayerCharacter {
 
     public Warrior(String name,
                    int lifePoints,
-                   int strength,
+                   int baseAttack,
                    OffensiveEquipment offensiveEquipment,
                    DefensiveEquipment defensiveEquipment)  {
 
         super(
                 name,
                 lifePoints,
-                strength,
+                baseAttack,
                 offensiveEquipment,
                 defensiveEquipment
         );
