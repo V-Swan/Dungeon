@@ -1,4 +1,4 @@
 package fr.campus.dungeon.game;
 
-public class Case {
+public class Cell {
 }
