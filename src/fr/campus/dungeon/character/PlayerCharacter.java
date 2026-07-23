@@ -50,7 +50,7 @@ public abstract class PlayerCharacter {
     public String toString() {
         return "Personnage : " + name +
                 ", Vie : " + lifePoints +
-                ", Force : " + baseAttack +
+                ", Attaque de base : " + baseAttack +
                 ", Arme : " + offensiveEquipment +
                 ", Défense : " + defensiveEquipment;
     }
