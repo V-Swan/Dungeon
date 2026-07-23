@@ -5,18 +5,14 @@ import fr.campus.dungeon.equipment.OffensiveEquipment;
 
 public class Wizard extends PlayerCharacter {
 
-    public Wizard(String name,
-                  int lifePoints,
-                  int baseAttack,
-                  OffensiveEquipment offensiveEquipment,
-                  DefensiveEquipment defensiveEquipment) {
+    public Wizard(String name) {
 
         super(
                 name,
-                lifePoints,
-                baseAttack,
-                offensiveEquipment,
-                defensiveEquipment
+                6,
+                8,
+                null,
+                null
         );
 
     }
