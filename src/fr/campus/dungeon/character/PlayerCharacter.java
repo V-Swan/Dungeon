@@ -7,19 +7,19 @@ public abstract class PlayerCharacter {
 
     private String name;
     private int lifePoints;
-    private int strength;
+    private int baseAttack;
 
     private OffensiveEquipment offensiveEquipment;
     private DefensiveEquipment defensiveEquipment;
 
 
-    public PlayerCharacter(String name, int lifePoints, int strength,
+    public PlayerCharacter(String name, int lifePoints, int baseAttack,
                            OffensiveEquipment offensiveEquipment,
                            DefensiveEquipment defensiveEquipment) {
 
         this.name = name;
         this.lifePoints = lifePoints;
-        this.strength = strength;
+        this.baseAttack = baseAttack;
         this.offensiveEquipment = offensiveEquipment;
         this.defensiveEquipment = defensiveEquipment;
     }
@@ -33,8 +33,8 @@ public abstract class PlayerCharacter {
         return lifePoints;
     }
 
-    public int getStrength() {
-        return strength;
+    public int getBaseAttack() {
+        return baseAttack;
     }
 
     public OffensiveEquipment getOffensiveEquipment() {
@@ -50,7 +50,7 @@ public abstract class PlayerCharacter {
     public String toString() {
         return "Personnage : " + name +
                 ", Vie : " + lifePoints +
-                ", Force : " + strength +
+                ", Force : " + baseAttack +
                 ", Arme : " + offensiveEquipment +
                 ", Défense : " + defensiveEquipment;
     }
