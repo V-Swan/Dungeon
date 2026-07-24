@@ -20,6 +20,8 @@ public class Battle {
 
         while (!player.isDead() && !enemy.isDead()) {
 
+            displayFightStatus();
+
             playerTurn();
 
             if (enemy.isDead()) {
@@ -28,10 +30,6 @@ public class Battle {
             }
 
             enemyTurn();
-
-            if (player.isDead()) {
-                System.out.println(player.getName() + " est mort !");
-            }
         }
     }
 
@@ -65,5 +63,24 @@ public class Battle {
         System.out.println(
                 player.getName() + " : " + player.getLifePoints() + " PV"
         );
+
+        if (player.isDead()) {
+            System.out.println(player.getName() + " est mort !");
+        }
+    }
+    private void displayFightStatus() {
+
+        System.out.println("====================");
+        System.out.println(player.getName()
+                + " : "
+                + player.getLifePoints()
+                + " PV");
+
+        System.out.println(enemy.getName()
+                + " : "
+                + enemy.getLifePoints()
+                + " PV");
+
+        System.out.println("====================");
     }
 }

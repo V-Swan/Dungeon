@@ -56,9 +56,7 @@ public class Game {
     }
         //board (test méthode random plus tard)
         private void initializeBoard() {
-            board.placeEvent(4, new EnemyEvent(new Gobelin()));
-            board.placeEvent(19, new EnemyEvent(new Sorcier()));
-            board.placeEvent(49, new EnemyEvent(new Dragon()));
+            placeEnemiesForTest();
         }
 
     private void movePlayer() {
@@ -112,11 +110,17 @@ public class Game {
     }
 
     private void playTurn() {
+
         MENU.waitPlayer();
+
         movePlayer();
 
         if (!hasWon()) {
             checkCell();
+        }
+
+        if (hasLost()) {
+            System.out.println("Votre aventure se termine ici...");
         }
     }
             //ajouter les autres logiques combat etc
@@ -131,9 +135,27 @@ public class Game {
             System.out.println("Félicitations ! Vous avez terminé le donjon !");
         }
         else if (hasLost()) {
-            System.out.println("Vous êtes mort dans le donjon...");
+            System.out.println("Le donjon aura eu raison de vous...");
         }
 
         System.out.println(character);
+    }
+    private void placeEnemiesForTest() {
+        board.placeEvent(4, new EnemyEvent(new Gobelin()));
+        board.placeEvent(19, new EnemyEvent(new Sorcier()));
+        board.placeEvent(49, new EnemyEvent(new Dragon()));
+        board.placeEvent(9, new EnemyEvent(new Dragon()));
+        board.placeEvent(10, new EnemyEvent(new Dragon()));
+        board.placeEvent(11, new EnemyEvent(new Dragon()));
+        board.placeEvent(12, new EnemyEvent(new Dragon()));
+        board.placeEvent(13, new EnemyEvent(new Dragon()));
+        board.placeEvent(14, new EnemyEvent(new Dragon()));
+        board.placeEvent(15, new EnemyEvent(new Dragon()));
+        board.placeEvent(16, new EnemyEvent(new Dragon()));
+        board.placeEvent(17, new EnemyEvent(new Dragon()));
+        board.placeEvent(18, new EnemyEvent(new Dragon()));
+        board.placeEvent(19, new EnemyEvent(new Dragon()));
+        board.placeEvent(20, new EnemyEvent(new Dragon()));
+        board.placeEvent(21, new EnemyEvent(new Dragon()));
     }
 }
