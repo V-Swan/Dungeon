@@ -1,7 +1,7 @@
 package fr.campus.dungeon.character;
 
-import fr.campus.dungeon.equipment.DefensiveEquipment;
-import fr.campus.dungeon.equipment.OffensiveEquipment;
+
+import fr.campus.dungeon.equipment.Weapon;
 
 public class Warrior extends PlayerCharacter {
 
@@ -11,7 +11,7 @@ public class Warrior extends PlayerCharacter {
                 name,
                 10,
                 5,
-                null,
+                new Weapon("Épée Inefficace", 0),
                 null
         );
     }

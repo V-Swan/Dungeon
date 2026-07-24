@@ -3,38 +3,19 @@ package fr.campus.dungeon.character;
 import fr.campus.dungeon.equipment.OffensiveEquipment;
 import fr.campus.dungeon.equipment.DefensiveEquipment;
 
-public abstract class PlayerCharacter {
-
-    private String name;
-    private int lifePoints;
-    private int baseAttack;
+public abstract class PlayerCharacter extends Character {
 
     private OffensiveEquipment offensiveEquipment;
     private DefensiveEquipment defensiveEquipment;
-
 
     public PlayerCharacter(String name, int lifePoints, int baseAttack,
                            OffensiveEquipment offensiveEquipment,
                            DefensiveEquipment defensiveEquipment) {
 
-        this.name = name;
-        this.lifePoints = lifePoints;
-        this.baseAttack = baseAttack;
+        super(name, lifePoints, baseAttack);
+
         this.offensiveEquipment = offensiveEquipment;
         this.defensiveEquipment = defensiveEquipment;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public int getLifePoints() {
-        return lifePoints;
-    }
-
-    public int getBaseAttack() {
-        return baseAttack;
     }
 
     public OffensiveEquipment getOffensiveEquipment() {
@@ -45,12 +26,21 @@ public abstract class PlayerCharacter {
         return defensiveEquipment;
     }
 
+    @Override
+    public int getAttack() {
+
+        if (offensiveEquipment != null) {
+            return getBaseAttack() + offensiveEquipment.getBonusAttack();
+        }
+
+        return getBaseAttack();
+    }
 
     @Override
     public String toString() {
-        return "Personnage : " + name +
-                ", Vie : " + lifePoints +
-                ", Attaque de base : " + baseAttack +
+        return "Personnage : " + getName() +
+                ", Vie : " + getLifePoints() +
+                ", Attaque de base : " + getBaseAttack() +
                 ", Arme : " + offensiveEquipment +
                 ", Défense : " + defensiveEquipment;
     }

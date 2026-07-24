@@ -52,4 +52,25 @@ public class Menu {
         }
         return name;
     }
+    public void waitPlayer() {
+        System.out.println("Appuyez sur Entrée pour lancer le dé...");
+        scanner.nextLine();
+    }
+    public String combatMenu() {
+        String choice = "";
+
+        while (!choice.equals("1") && !choice.equals("2")) {
+
+            System.out.println("=== Combat ===");
+            System.out.println("1 - Attaquer");
+            System.out.println("2 - Utiliser un objet");
+
+            choice = scanner.nextLine();
+
+            if (!choice.equals("1") && !choice.equals("2")) {
+                System.out.println("Choix invalide !");
+            }
+        }
+        return choice;
+    }
 }
