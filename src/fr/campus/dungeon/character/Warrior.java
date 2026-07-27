@@ -12,7 +12,8 @@ public class Warrior extends PlayerCharacter {
                 10,
                 5,
                 new Weapon("Épée Inefficace", 0),
-                null
+                null,
+                new Inventory()
         );
     }
 }

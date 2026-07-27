@@ -9,7 +9,8 @@ public class Wizard extends PlayerCharacter {
                 6,
                 8,
                 null,
-                null
+                null,
+                new Inventory()
         );
 
     }
