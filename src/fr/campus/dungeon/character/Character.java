@@ -4,13 +4,17 @@ public abstract class Character {
     private String name;
     private int lifePoints;
     private int baseAttack;
-        //constructeur
+    private int maxLifePoints;
+
+    //constructeur
     public Character(String name, int lifePoints, int baseAttack) {
         this.name = name;
         this.lifePoints = lifePoints;
+        this.maxLifePoints = lifePoints;
         this.baseAttack = baseAttack;
     }
-        //getter
+
+    //getter
     public String getName() {
         return name;
     }
@@ -22,7 +26,8 @@ public abstract class Character {
     public int getBaseAttack() {
         return baseAttack;
     }
-        //gestion des dégâts
+
+    //gestion des dégâts
     public void takeDamage(int damage) {
 
         if (damage <= 0) {
@@ -35,16 +40,37 @@ public abstract class Character {
             lifePoints -= damage;
         }
     }
-        //Mort
+
+    protected void addLifePoints(int amount) {
+
+        if (amount <= 0) {
+            return;
+        }
+
+        lifePoints += amount;
+
+        if (lifePoints > maxLifePoints) {
+            lifePoints = maxLifePoints;
+        }
+    }
+
+    //Mort
     public boolean isDead() {
         return lifePoints == 0;
     }
+
     public int attack(Character target) {
         int damage = getAttack();
         target.takeDamage(damage);
         return damage;
     }
+
     public int getAttack() {
         return baseAttack;
+    }
+
+    // getter pour afficher les hp
+    public int getMaxLifePoints() {
+        return maxLifePoints;
     }
 }

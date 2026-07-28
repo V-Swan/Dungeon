@@ -1,14 +1,15 @@
 package fr.campus.dungeon.game;
 
+import fr.campus.dungeon.character.Character;
 import fr.campus.dungeon.character.PlayerCharacter;
+import fr.campus.dungeon.equipment.Consumable;
 import fr.campus.dungeon.equipment.Equipment;
 import fr.campus.dungeon.menu.Menu;
-import fr.campus.dungeon.character.Character;
 
 public class Battle {
 
-    private PlayerCharacter player;
-    private Character enemy;
+    private final PlayerCharacter player;
+    private final Character enemy;
     private final Menu MENU = new Menu();
 
     public Battle(PlayerCharacter player, Character enemy) {
@@ -42,22 +43,19 @@ public class Battle {
         switch (choice) {
 
             case "1":
-                int damage = player.attack(enemy);
-
-                System.out.println(player.getName() + " attaque " + enemy.getName() + " avec une puissance de " + player.getAttack() + " !");
-
-                System.out.println(enemy.getName() + " subit " + damage + " points de dégâts.");
+                attackEnemy();
                 break;
 
             case "2":
-                Equipment usedItem =  MENU.chooseItem(player.getInventory());
-                System.out.println(player.getName() + " utilise " + usedItem + " !");
+                useItem();
                 break;
         }
+
 
         System.out.println(
                 enemy.getName() + " : " + enemy.getLifePoints() + " PV"
         );
+
     }
 
     private void enemyTurn() {
@@ -74,19 +72,52 @@ public class Battle {
             System.out.println(player.getName() + " est mort !");
         }
     }
+
     private void displayFightStatus() {
 
         System.out.println("====================");
-        System.out.println(player.getName()
-                + " : "
-                + player.getLifePoints()
-                + " PV");
+        System.out.println(player.getName() + " : " + player.getLifePoints() + " PV");
 
-        System.out.println(enemy.getName()
-                + " : "
-                + enemy.getLifePoints()
-                + " PV");
+        System.out.println(enemy.getName() + " : " + enemy.getLifePoints() + " PV");
 
         System.out.println("====================");
+    }
+
+    private void attackEnemy() {
+
+        int damage = player.attack(enemy);
+
+        System.out.println(player.getName() + " attaque " + enemy.getName() + " avec une puissance de " + player.getAttack() + " !");
+
+        System.out.println(enemy.getName() + " subit " + damage + " points de dégâts.");
+    }
+
+    private void useItem() {
+
+        Equipment usedItem = MENU.chooseItem(player.getInventory());
+
+        if (usedItem == null) {
+            return;
+        }
+
+        if (usedItem instanceof Consumable potion) {
+
+            int oldLifePoints = player.getLifePoints();
+
+            player.heal(potion.getHealingValue());
+
+            int healed = player.getLifePoints() - oldLifePoints;
+
+            player.getInventory().removeItem(potion);
+
+            System.out.println(player.getName() + " utilise " + potion + " !");
+
+            System.out.println(player.getName() + " récupère " + healed + " PV.");
+
+            System.out.println(player.getName() + " : " + player.getLifePoints() + "/" + player.getMaxLifePoints() + " PV");
+
+        } else {
+            System.out.println("Cet objet ne peut pas être utilisé.");
+        }
     }
 }

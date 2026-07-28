@@ -44,6 +44,10 @@ public abstract class PlayerCharacter extends Character {
         return getBaseAttack();
     }
 
+    public void heal(int amount) {
+        addLifePoints(amount);
+    }
+
     @Override
     public String toString() {
         return "Personnage : " + getName() +

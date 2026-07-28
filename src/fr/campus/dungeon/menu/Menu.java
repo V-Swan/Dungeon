@@ -67,7 +67,6 @@ public class Menu {
             System.out.println("=== Combat ===");
             System.out.println("1 - Attaquer");
             System.out.println("2 - Utiliser un objet");
-            System.out.println("3 - Fuir !");
 
             choice = scanner.nextLine();
 
@@ -87,11 +86,32 @@ public class Menu {
     }
 
     public Equipment chooseItem(Inventory inventory) {
-        int choice = scanner.nextInt();
-        Equipment item = inventory.getItem(choice);
-        return item;
 
+        if (inventory.getNumberOfItems() == 0) {
+            System.out.println("Votre inventaire est vide !");
+            return null;
+        }
+
+        int choice = -1;
+
+        while (choice < 0 || choice >= inventory.getNumberOfItems()) {
+
+            displayInventory(inventory);
+
+            System.out.println("Choisissez un objet :");
+            /*
+             Scanner lit toujours une entrée utilisateur comme une String.
+             Integer.parseInt() permet de convertir cette String en int
+             afin de pouvoir utiliser la valeur comme un index dans l'ArrayList.
+             */
+            String input = scanner.nextLine();
+            choice = Integer.parseInt(input);
+
+            if (choice < 0 || choice >= inventory.getNumberOfItems()) {
+                System.out.println("Choix invalide !");
+            }
+        }
+
+        return inventory.getItem(choice);
     }
-
-
 }
