@@ -22,4 +22,12 @@ public class Inventory {
     public ArrayList<Equipment> getInventory() {
         return inventory;
     }
+
+    public Equipment getItem(int index) {
+        return inventory.get(index);
+    }
+
+    public int getNumberOfItems() {
+        return inventory.size();
+    }
 }

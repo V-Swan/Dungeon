@@ -1,4 +1,7 @@
 package fr.campus.dungeon.menu;
+import fr.campus.dungeon.character.Inventory;
+import fr.campus.dungeon.equipment.Equipment;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -64,6 +67,7 @@ public class Menu {
             System.out.println("=== Combat ===");
             System.out.println("1 - Attaquer");
             System.out.println("2 - Utiliser un objet");
+            System.out.println("3 - Fuir !");
 
             choice = scanner.nextLine();
 
@@ -73,4 +77,21 @@ public class Menu {
         }
         return choice;
     }
+    public void displayInventory(Inventory inventory){
+        System.out.println("=== Inventaire ===");
+        for (int i = 0; i < inventory.getNumberOfItems(); i++) {
+            Equipment item = inventory.getItem(i);
+            System.out.println(i + " - " + item);
+
+        }
+    }
+
+    public Equipment chooseItem(Inventory inventory) {
+        int choice = scanner.nextInt();
+        Equipment item = inventory.getItem(choice);
+        return item;
+
+    }
+
+
 }

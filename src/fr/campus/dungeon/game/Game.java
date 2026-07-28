@@ -123,12 +123,12 @@ public class Game {
             System.out.println("Votre aventure se termine ici...");
         }
     }
-            //ajouter les autres logiques combat etc
-            private void gameLoop() {
-                while (!hasWon() && !hasLost()) {
-                    playTurn();
-                }
+        //ajouter les autres logiques combat etc
+        private void gameLoop() {
+            while (!hasWon() && !hasLost()) {
+                playTurn();
             }
+        }
     private void endGame() {
 
         if (hasWon()) {

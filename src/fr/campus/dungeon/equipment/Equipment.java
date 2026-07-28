@@ -1,6 +1,6 @@
 package fr.campus.dungeon.equipment;
 
-public class Equipment {
+public abstract class Equipment {
     private String name;
 
 
