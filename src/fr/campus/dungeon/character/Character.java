@@ -39,8 +39,10 @@ public abstract class Character {
     public boolean isDead() {
         return lifePoints == 0;
     }
-    public void attack(Character target) {
-        target.takeDamage(getAttack());
+    public int attack(Character target) {
+        int damage = getAttack();
+        target.takeDamage(damage);
+        return damage;
     }
     public int getAttack() {
         return baseAttack;
