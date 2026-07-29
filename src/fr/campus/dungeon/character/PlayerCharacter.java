@@ -82,4 +82,20 @@ public abstract class PlayerCharacter extends Character {
                 ", Arme : " + offensiveEquipment +
                 ", Défense : " + defensiveEquipment;
     }
+    @Override
+    public void takeDamage(int damage) {
+
+        if (defensiveEquipment != null) {
+
+            damage -= defensiveEquipment.getDamageReduction();
+
+        }
+
+        if (damage < 0) {
+            damage = 0;
+        }
+
+        super.takeDamage(damage);
+    }
 }
+
