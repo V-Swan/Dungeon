@@ -151,5 +151,25 @@ public abstract class PlayerCharacter extends Character {
             inventory.addItem(equipment);
         }
     }
+    public void useItem(int index) {
+
+        Equipment equipment = inventory.getItem(index);
+
+        if (equipment instanceof Consumable consumable) {
+
+            heal(consumable.getHealingValue());
+
+            inventory.removeItem(consumable);
+
+            System.out.println(
+                    "Vous utilisez " + consumable
+            );
+        }
+        else {
+            System.out.println(
+                    "Cet objet ne peut pas être utilisé."
+            );
+        }
+    }
 }
 

@@ -153,4 +153,21 @@ public class Menu {
                 throw new IllegalArgumentException("Difficulté inconnue");
         }
     }
+    public int inventoryMenu(Inventory inventory) {
+
+        inventory.displayInventory();
+
+        System.out.println("Choisissez un objet :");
+
+        return Integer.parseInt(scanner.nextLine()) - 1;
+    }
+    public String actionMenu() {
+
+        System.out.println("\n=== Action ===");
+        System.out.println("1 - Lancer le dé");
+        System.out.println("2 - Inventaire");
+        System.out.println("3 - Quitter");
+
+        return scanner.nextLine();
+    }
 }

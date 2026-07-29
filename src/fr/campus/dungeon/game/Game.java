@@ -5,7 +5,6 @@ import fr.campus.dungeon.character.Warrior;
 import fr.campus.dungeon.character.Wizard;
 import fr.campus.dungeon.enemy.Dragon;
 import fr.campus.dungeon.enemy.Enemy;
-import fr.campus.dungeon.equipment.Consumable;
 import fr.campus.dungeon.equipment.Equipment;
 import fr.campus.dungeon.event.EnemyEvent;
 import fr.campus.dungeon.event.LootBoxEvent;
@@ -24,6 +23,7 @@ public class Game {
     private final EnemyGenerator enemyGenerator = new EnemyGenerator();
     private final Random random = new Random();
     private final LootGenerator lootGenerator = new LootGenerator();
+    private boolean running = true;
 
     public void start() {
         String choice = MENU.mainMenu();
@@ -84,29 +84,13 @@ public class Game {
 
     private void placeLootBoxes() {
 
-        int numberOfLootBoxes = 0;
-
-        switch (configuration.getDifficulty()) {
-
-            case EASY:
-                numberOfLootBoxes = 10;
-                break;
-
-            case NORMAL:
-                numberOfLootBoxes = 6;
-                break;
-
-            case HARD:
-                numberOfLootBoxes = 4;
-                break;
-        }
-        for (int i = 0; i < numberOfLootBoxes; i++) {
+        for (int i = 0; i < 24; i++) {
 
             int position = getRandomEmptyPosition();
 
             board.placeEvent(
                     position,
-                    new LootBoxEvent(lootGenerator.generateLoot())
+                    new LootBoxEvent(lootGenerator.generateLoot(character))
             );
         }
     }
@@ -175,8 +159,10 @@ public class Game {
     }
 
     private boolean hasWon() {
+        Cell lastCell = board.getCell(board.getCells().size() - 1);
+
         return playerPosition >= board.getCells().size()
-                && board.getCell(board.getCells().size() - 1).getEvent() == null;
+                && lastCell.getEvent() == null;
     }
     private boolean hasLost() {
         return character.isDead();
@@ -184,21 +170,51 @@ public class Game {
 
     private void playTurn() {
 
-        MENU.waitPlayer();
+        String choice = MENU.actionMenu();
 
-        movePlayer();
+        switch (choice) {
 
-        if (!hasWon()) {
-            checkCell();
+            case "1":
+                movePlayer();
+
+                if (!hasWon()) {
+                    checkCell();
+                }
+                break;
+
+            case "2":
+                useInventory();
+                break;
+
+            case "3":
+                System.out.println("Vous quittez le donjon.");
+                running = false;
+                break;
+
+            default:
+                System.out.println("Choix invalide.");
         }
 
         if (hasLost()) {
             System.out.println("Votre aventure se termine ici...");
         }
     }
+    private void useInventory() {
+
+        if (character.getInventory().getNumberOfItems() == 0) {
+            System.out.println("Votre inventaire est vide.");
+            return;
+        }
+
+        int choice = MENU.inventoryMenu(character.getInventory());
+
+        character.useItem(choice);
+    }
+
         //ajouter les autres logiques combat etc
         private void gameLoop() {
-            while (!hasWon() && !hasLost()) {
+
+            while (running && !hasWon() && !hasLost()) {
                 playTurn();
             }
         }

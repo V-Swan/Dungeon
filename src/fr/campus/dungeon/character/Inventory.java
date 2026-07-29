@@ -30,4 +30,19 @@ public class Inventory {
     public int getNumberOfItems() {
         return inventory.size();
     }
+
+    public void displayInventory() {
+
+        if (inventory.isEmpty()) {
+            System.out.println("Inventaire vide.");
+            return;
+        }
+
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println(
+                    (i + 1) + " - " + inventory.get(i)
+            );
+        }
+    }
 }
+

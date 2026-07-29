@@ -1,12 +1,16 @@
 package fr.campus.dungeon.game;
 
+import fr.campus.dungeon.character.Warrior;
+import fr.campus.dungeon.character.Wizard;
 import fr.campus.dungeon.equipment.Consumable;
 import fr.campus.dungeon.equipment.Equipment;
 import fr.campus.dungeon.equipment.Robe;
 import fr.campus.dungeon.equipment.Shield;
 import fr.campus.dungeon.equipment.Spell;
 import fr.campus.dungeon.equipment.Weapon;
+import fr.campus.dungeon.character.PlayerCharacter;
 import java.util.Random;
+
 
 public class LootGenerator {
 
@@ -119,28 +123,43 @@ public class LootGenerator {
     }
 
 
-    public Equipment generateLoot() {
+    public Equipment generateLoot(PlayerCharacter player) {
 
-        int choice = random.nextInt(5);
+        int choice;
 
-        switch(choice) {
+        if (player instanceof Warrior) {
 
-            case 0:
-                return generateWeapon();
+            choice = random.nextInt(3);
 
-            case 1:
-                return generateShield();
+            switch (choice) {
 
-            case 2:
-                return generateRobe();
+                case 0:
+                    return generateWeapon();
 
-            case 3:
-                return generateSpell();
+                case 1:
+                    return generateShield();
 
-            case 4:
-                return generateConsumable();
+                case 2:
+                    return generateConsumable();
+            }
+
+        } else if (player instanceof Wizard) {
+
+            choice = random.nextInt(3);
+
+            switch (choice) {
+
+                case 0:
+                    return generateSpell();
+
+                case 1:
+                    return generateRobe();
+
+                case 2:
+                    return generateConsumable();
+            }
         }
 
-        return new Consumable("Potion de soin", 5);
+        return generateConsumable();
     }
 }

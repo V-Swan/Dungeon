@@ -17,7 +17,7 @@ public class EnemyGenerator {
 
             case EASY:
 
-                addGoblins(enemies, 4);
+                addGoblins(enemies, 21);
                 addSorcerers(enemies, 2);
                 addDragons(enemies, 0);
 
@@ -25,16 +25,16 @@ public class EnemyGenerator {
 
             case NORMAL:
 
-                addGoblins(enemies, 2);
-                addSorcerers(enemies, 4);
+                addGoblins(enemies, 17);
+                addSorcerers(enemies, 6);
                 addDragons(enemies, 0);
 
                 break;
 
             case HARD:
 
-                addGoblins(enemies, 1);
-                addSorcerers(enemies, 5);
+                addGoblins(enemies, 11);
+                addSorcerers(enemies, 12);
                 addDragons(enemies, 0);
 
                 break;
