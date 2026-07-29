@@ -1,8 +1,6 @@
 package fr.campus.dungeon.character;
 
-import fr.campus.dungeon.equipment.Equipment;
-import fr.campus.dungeon.equipment.OffensiveEquipment;
-import fr.campus.dungeon.equipment.DefensiveEquipment;
+import fr.campus.dungeon.equipment.*;
 import fr.campus.dungeon.character.Inventory;
 
 public abstract class PlayerCharacter extends Character {
@@ -100,6 +98,30 @@ public abstract class PlayerCharacter extends Character {
     }
     public void receiveEquipment(Equipment equipment) {
 
+        if (this instanceof Warrior) {
+
+            if (equipment instanceof Spell || equipment instanceof Robe) {
+
+                inventory.addItem(equipment);
+
+                System.out.println("Cet objet ne correspond pas à votre classe.");
+                return;
+            }
+        }
+
+
+        if (this instanceof Wizard) {
+
+            if (equipment instanceof Weapon || equipment instanceof Shield) {
+
+                inventory.addItem(equipment);
+
+                System.out.println("Cet objet ne correspond pas à votre classe.");
+                return;
+            }
+        }
+
+
         if (equipment instanceof OffensiveEquipment weapon) {
 
             if (getOffensiveEquipment() == null ||
@@ -125,6 +147,7 @@ public abstract class PlayerCharacter extends Character {
             }
 
         } else {
+
             inventory.addItem(equipment);
         }
     }
