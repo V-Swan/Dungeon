@@ -4,7 +4,10 @@ import fr.campus.dungeon.character.PlayerCharacter;
 import fr.campus.dungeon.character.Warrior;
 import fr.campus.dungeon.character.Wizard;
 import fr.campus.dungeon.enemy.Enemy;
+import fr.campus.dungeon.equipment.Consumable;
+import fr.campus.dungeon.equipment.Equipment;
 import fr.campus.dungeon.event.EnemyEvent;
+import fr.campus.dungeon.event.LootBoxEvent;
 import fr.campus.dungeon.menu.Menu;
 import java.util.Random;
 import java.util.ArrayList;
@@ -61,17 +64,50 @@ public class Game {
             default -> throw new IllegalArgumentException("Classe inconnue");
         };
     }
-        private void initializeBoard() {
+    private void initializeBoard() {
 
-            ArrayList<Enemy> enemies = enemyGenerator.generateEnemies(configuration);
+        ArrayList<Enemy> enemies = enemyGenerator.generateEnemies(configuration);
 
-            for (Enemy enemy : enemies) {
+        for (Enemy enemy : enemies) {
 
-                int position = getRandomEnemyPosition();
+            int position = getRandomEmptyPosition();
 
-                board.placeEvent(position, new EnemyEvent(enemy));
-            }
+            board.placeEvent(position, new EnemyEvent(enemy));
         }
+
+        placeLootBoxes();
+    }
+
+    private void placeLootBoxes() {
+
+        int numberOfLootBoxes = 0;
+
+        switch (configuration.getDifficulty()) {
+
+            case EASY:
+                numberOfLootBoxes = 10;
+                break;
+
+            case NORMAL:
+                numberOfLootBoxes = 6;
+                break;
+
+            case HARD:
+                numberOfLootBoxes = 4;
+                break;
+        }
+
+
+        for (int i = 0; i < numberOfLootBoxes; i++) {
+
+            int position = getRandomEmptyPosition();
+
+            board.placeEvent(
+                    position,
+                    new LootBoxEvent(new Consumable("Potion de soin", 5))
+            );
+        }
+    }
 
     private void movePlayer() {
 
@@ -110,8 +146,19 @@ public class Game {
             if (enemy.isDead()) {
                 cell.clearEvent();
             }
-        }
-        else {
+
+        } else if (cell.getEvent() instanceof LootBoxEvent lootBoxEvent) {
+
+            Equipment equipment = lootBoxEvent.getEquipment();
+
+            System.out.println("Vous trouvez un coffre !");
+            System.out.println("Vous obtenez : " + equipment);
+
+            character.getInventory().addItem(equipment);
+
+            cell.clearEvent();
+
+        } else {
             System.out.println("Cette case est vide.");
         }
     }
@@ -154,7 +201,7 @@ public class Game {
 
         System.out.println(character);
     }
-    private int getRandomEnemyPosition() {
+    private int getRandomEmptyPosition() {
 
         int position;
 

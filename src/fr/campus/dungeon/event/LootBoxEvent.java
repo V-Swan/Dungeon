@@ -1,17 +1,21 @@
-/*package fr.campus.dungeon.event;
+package fr.campus.dungeon.event;
 
-/*public class LootBoxEvent extends Event{
+import fr.campus.dungeon.equipment.Equipment;
 
-    private Event event;
+public class LootBoxEvent extends Event {
 
-    public LootBoxEvent Event event) {
-        this.event = event;
+    private Equipment equipment;
+
+    public LootBoxEvent(Equipment equipment) {
+        this.equipment = equipment;
     }
 
-    public Event getEvent() {
-        return event;
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    @Override
+    public String toString() {
+        return "Vous trouvez un coffre contenant : " + equipment;
     }
 }
-
-
- */
