@@ -1,6 +1,8 @@
 package fr.campus.dungeon.character;
 
 
+import fr.campus.dungeon.equipment.DefensiveEquipment;
+import fr.campus.dungeon.equipment.OffensiveEquipment;
 import fr.campus.dungeon.equipment.Shield;
 import fr.campus.dungeon.equipment.Weapon;
 
@@ -17,4 +19,31 @@ public class Warrior extends PlayerCharacter {
                 new Inventory()
         );
     }
+    @Override
+    public void equipDefensiveEquipment(DefensiveEquipment equipment) {
+
+        if (equipment == null) {
+            return;
+        }
+
+        if (equipment instanceof Shield) {
+            super.equipDefensiveEquipment(equipment);
+        } else {
+            System.out.println("Un guerrier ne peut pas équiper cet objet.");
+        }
+    }
+    @Override
+    public void equipWeapon(OffensiveEquipment weapon) {
+
+        if (weapon == null) {
+            return;
+        }
+
+        if (weapon instanceof Weapon) {
+            super.equipWeapon(weapon);
+        } else {
+            System.out.println("Un guerrier ne peut pas équiper cette arme.");
+        }
+    }
+
 }
