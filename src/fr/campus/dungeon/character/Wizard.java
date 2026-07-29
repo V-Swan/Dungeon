@@ -1,5 +1,8 @@
 package fr.campus.dungeon.character;
 
+import fr.campus.dungeon.equipment.Robe;
+import fr.campus.dungeon.equipment.Spell;
+
 public class Wizard extends PlayerCharacter {
 
     public Wizard(String name) {
@@ -8,8 +11,8 @@ public class Wizard extends PlayerCharacter {
                 name,
                 6,
                 8,
-                null,
-                null,
+                new Spell("Parchemin dépourvu de magie", 0),
+                new Robe("Robe lacérée", 0),
                 new Inventory()
         );
 

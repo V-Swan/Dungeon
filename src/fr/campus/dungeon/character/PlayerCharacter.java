@@ -48,6 +48,32 @@ public abstract class PlayerCharacter extends Character {
         addLifePoints(amount);
     }
 
+    public void equipWeapon(OffensiveEquipment weapon) {
+
+        if (weapon == null) {
+            return;
+        }
+
+        if (offensiveEquipment != null) {
+            inventory.addItem(offensiveEquipment);
+        }
+
+        inventory.removeItem(weapon);
+
+        offensiveEquipment = weapon;
+    }
+
+    public void equipDefensiveEquipment(DefensiveEquipment defensiveEquipment) {
+
+        if (this.defensiveEquipment != null) {
+            inventory.addItem(this.defensiveEquipment);
+        }
+
+        inventory.removeItem(defensiveEquipment);
+
+        this.defensiveEquipment = defensiveEquipment;
+    }
+
     @Override
     public String toString() {
         return "Personnage : " + getName() +

@@ -3,7 +3,9 @@ package fr.campus.dungeon.game;
 import fr.campus.dungeon.character.Character;
 import fr.campus.dungeon.character.PlayerCharacter;
 import fr.campus.dungeon.equipment.Consumable;
+import fr.campus.dungeon.equipment.DefensiveEquipment;
 import fr.campus.dungeon.equipment.Equipment;
+import fr.campus.dungeon.equipment.OffensiveEquipment;
 import fr.campus.dungeon.menu.Menu;
 
 public class Battle {
@@ -51,11 +53,6 @@ public class Battle {
                 break;
         }
 
-
-        System.out.println(
-                enemy.getName() + " : " + enemy.getLifePoints() + " PV"
-        );
-
     }
 
     private void enemyTurn() {
@@ -90,6 +87,8 @@ public class Battle {
         System.out.println(player.getName() + " attaque " + enemy.getName() + " avec une puissance de " + player.getAttack() + " !");
 
         System.out.println(enemy.getName() + " subit " + damage + " points de dégâts.");
+
+        System.out.println(enemy.getName() + " : " + enemy.getLifePoints() + " PV");
     }
 
     private void useItem() {
@@ -100,7 +99,9 @@ public class Battle {
             return;
         }
 
-        if (usedItem instanceof Consumable potion) {
+        if (usedItem instanceof Consumable) {
+
+            Consumable potion = (Consumable) usedItem;
 
             int oldLifePoints = player.getLifePoints();
 
@@ -114,9 +115,30 @@ public class Battle {
 
             System.out.println(player.getName() + " récupère " + healed + " PV.");
 
-            System.out.println(player.getName() + " : " + player.getLifePoints() + "/" + player.getMaxLifePoints() + " PV");
+            System.out.println(player.getName() + " : "
+                    + player.getLifePoints()
+                    + "/"
+                    + player.getMaxLifePoints()
+                    + " PV");
+        }
+        else if (usedItem instanceof OffensiveEquipment) {
 
-        } else {
+            OffensiveEquipment weapon = (OffensiveEquipment) usedItem;
+
+            player.equipWeapon(weapon);
+
+            System.out.println(player.getName() + " équipe " + weapon + " !");
+        }
+        else if (usedItem instanceof DefensiveEquipment) {
+
+            DefensiveEquipment equipment = (DefensiveEquipment) usedItem;
+
+            player.equipDefensiveEquipment(equipment);
+
+            System.out.println(player.getName() + " équipe " + equipment + " !");
+
+        }
+        else {
             System.out.println("Cet objet ne peut pas être utilisé.");
         }
     }
