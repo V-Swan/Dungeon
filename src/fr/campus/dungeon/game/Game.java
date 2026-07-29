@@ -23,6 +23,7 @@ public class Game {
     private GameConfiguration configuration;
     private final EnemyGenerator enemyGenerator = new EnemyGenerator();
     private final Random random = new Random();
+    private final LootGenerator lootGenerator = new LootGenerator();
 
     public void start() {
         String choice = MENU.mainMenu();
@@ -99,15 +100,13 @@ public class Game {
                 numberOfLootBoxes = 4;
                 break;
         }
-
-
         for (int i = 0; i < numberOfLootBoxes; i++) {
 
             int position = getRandomEmptyPosition();
 
             board.placeEvent(
                     position,
-                    new LootBoxEvent(new Consumable("Potion de soin", 5))
+                    new LootBoxEvent(lootGenerator.generateLoot())
             );
         }
     }
@@ -166,7 +165,7 @@ public class Game {
             System.out.println("Vous trouvez un coffre !");
             System.out.println("Vous obtenez : " + equipment);
 
-            character.getInventory().addItem(equipment);
+            character.receiveEquipment(equipment);
 
             cell.clearEvent();
 

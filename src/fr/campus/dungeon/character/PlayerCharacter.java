@@ -1,5 +1,6 @@
 package fr.campus.dungeon.character;
 
+import fr.campus.dungeon.equipment.Equipment;
 import fr.campus.dungeon.equipment.OffensiveEquipment;
 import fr.campus.dungeon.equipment.DefensiveEquipment;
 import fr.campus.dungeon.character.Inventory;
@@ -58,18 +59,18 @@ public abstract class PlayerCharacter extends Character {
             inventory.addItem(offensiveEquipment);
         }
 
-        inventory.removeItem(weapon);
-
         offensiveEquipment = weapon;
     }
 
     public void equipDefensiveEquipment(DefensiveEquipment defensiveEquipment) {
 
+        if (defensiveEquipment == null) {
+            return;
+        }
+
         if (this.defensiveEquipment != null) {
             inventory.addItem(this.defensiveEquipment);
         }
-
-        inventory.removeItem(defensiveEquipment);
 
         this.defensiveEquipment = defensiveEquipment;
     }
@@ -96,6 +97,36 @@ public abstract class PlayerCharacter extends Character {
         }
 
         super.takeDamage(damage);
+    }
+    public void receiveEquipment(Equipment equipment) {
+
+        if (equipment instanceof OffensiveEquipment weapon) {
+
+            if (getOffensiveEquipment() == null ||
+                    weapon.getBonusAttack() > getOffensiveEquipment().getBonusAttack()) {
+
+                equipWeapon(weapon);
+                System.out.println("Nouvelle arme équipée !");
+            }
+            else {
+                inventory.addItem(equipment);
+            }
+
+        } else if (equipment instanceof DefensiveEquipment defense) {
+
+            if (getDefensiveEquipment() == null ||
+                    defense.getDamageReduction() > getDefensiveEquipment().getDamageReduction()) {
+
+                equipDefensiveEquipment(defense);
+                System.out.println("Nouvel équipement défensif équipé !");
+            }
+            else {
+                inventory.addItem(equipment);
+            }
+
+        } else {
+            inventory.addItem(equipment);
+        }
     }
 }
 
