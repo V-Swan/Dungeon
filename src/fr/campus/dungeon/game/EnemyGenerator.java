@@ -19,7 +19,7 @@ public class EnemyGenerator {
 
                 addGoblins(enemies, 4);
                 addSorcerers(enemies, 2);
-                addDragons(enemies, 1);
+                addDragons(enemies, 0);
 
                 break;
 
@@ -27,15 +27,15 @@ public class EnemyGenerator {
 
                 addGoblins(enemies, 2);
                 addSorcerers(enemies, 4);
-                addDragons(enemies, 1);
+                addDragons(enemies, 0);
 
                 break;
 
             case HARD:
 
                 addGoblins(enemies, 1);
-                addSorcerers(enemies, 2);
-                addDragons(enemies, 2);
+                addSorcerers(enemies, 5);
+                addDragons(enemies, 0);
 
                 break;
         }

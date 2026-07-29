@@ -3,6 +3,7 @@ package fr.campus.dungeon.game;
 import fr.campus.dungeon.character.PlayerCharacter;
 import fr.campus.dungeon.character.Warrior;
 import fr.campus.dungeon.character.Wizard;
+import fr.campus.dungeon.enemy.Dragon;
 import fr.campus.dungeon.enemy.Enemy;
 import fr.campus.dungeon.equipment.Consumable;
 import fr.campus.dungeon.equipment.Equipment;
@@ -76,6 +77,8 @@ public class Game {
         }
 
         placeLootBoxes();
+
+        placeBoss();
     }
 
     private void placeLootBoxes() {
@@ -107,6 +110,15 @@ public class Game {
                     new LootBoxEvent(new Consumable("Potion de soin", 5))
             );
         }
+    }
+    private void placeBoss() {
+
+        int lastPosition = board.getCells().size();
+
+        board.placeEvent(
+                lastPosition - 1,
+                new EnemyEvent(new Dragon())
+        );
     }
 
     private void movePlayer() {
@@ -164,7 +176,8 @@ public class Game {
     }
 
     private boolean hasWon() {
-        return playerPosition >= board.getCells().size();
+        return playerPosition >= board.getCells().size()
+                && board.getCell(board.getCells().size() - 1).getEvent() == null;
     }
     private boolean hasLost() {
         return character.isDead();
@@ -206,7 +219,7 @@ public class Game {
         int position;
 
         do {
-            position = random.nextInt(board.getCells().size() - 1) + 1;
+            position = random.nextInt(board.getCells().size() - 1);
 
         } while (board.getCell(position).getEvent() != null);
 
