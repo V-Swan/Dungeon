@@ -6,7 +6,7 @@ import fr.campus.dungeon.character.Wizard;
 import fr.campus.dungeon.enemy.Enemy;
 import fr.campus.dungeon.event.EnemyEvent;
 import fr.campus.dungeon.menu.Menu;
-
+import java.util.Random;
 import java.util.ArrayList;
 
 
@@ -18,6 +18,7 @@ public class Game {
     private final Dice dice = new Dice();
     private GameConfiguration configuration;
     private final EnemyGenerator enemyGenerator = new EnemyGenerator();
+    private final Random random = new Random();
 
     public void start() {
         String choice = MENU.mainMenu();
@@ -64,13 +65,11 @@ public class Game {
 
             ArrayList<Enemy> enemies = enemyGenerator.generateEnemies(configuration);
 
-            int position = 4;
-
             for (Enemy enemy : enemies) {
 
-                board.placeEvent(position, new EnemyEvent(enemy));
+                int position = getRandomEnemyPosition();
 
-                position += 5;
+                board.placeEvent(position, new EnemyEvent(enemy));
             }
         }
 
@@ -155,24 +154,15 @@ public class Game {
 
         System.out.println(character);
     }
-    /*private void placeEnemiesForTest() {
-        board.placeEvent(4, new EnemyEvent(new Gobelin()));
-        board.placeEvent(19, new EnemyEvent(new Sorcier()));
-        board.placeEvent(49, new EnemyEvent(new Dragon()));
-        board.placeEvent(9, new EnemyEvent(new Dragon()));
-        board.placeEvent(10, new EnemyEvent(new Dragon()));
-        board.placeEvent(11, new EnemyEvent(new Dragon()));
-        board.placeEvent(12, new EnemyEvent(new Dragon()));
-        board.placeEvent(13, new EnemyEvent(new Dragon()));
-        board.placeEvent(14, new EnemyEvent(new Dragon()));
-        board.placeEvent(15, new EnemyEvent(new Dragon()));
-        board.placeEvent(16, new EnemyEvent(new Dragon()));
-        board.placeEvent(17, new EnemyEvent(new Dragon()));
-        board.placeEvent(18, new EnemyEvent(new Dragon()));
-        board.placeEvent(19, new EnemyEvent(new Dragon()));
-        board.placeEvent(20, new EnemyEvent(new Dragon()));
-        board.placeEvent(21, new EnemyEvent(new Dragon()));
-    }
+    private int getRandomEnemyPosition() {
 
-     */
+        int position;
+
+        do {
+            position = random.nextInt(board.getCells().size() - 1) + 1;
+
+        } while (board.getCell(position).getEvent() != null);
+
+        return position;
+    }
 }
