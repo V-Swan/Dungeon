@@ -1,6 +1,7 @@
 package fr.campus.dungeon.menu;
 import fr.campus.dungeon.character.Inventory;
 import fr.campus.dungeon.equipment.Equipment;
+import fr.campus.dungeon.game.GameConfiguration.Difficulty;
 
 import java.util.Scanner;
 
@@ -113,5 +114,43 @@ public class Menu {
         }
 
         return inventory.getItem(choice);
+    }
+    public Difficulty difficultyMenu() {
+
+        String choice = "";
+
+        while (!choice.equals("1")
+                && !choice.equals("2")
+                && !choice.equals("3")) {
+
+            System.out.println("=== Difficulté ===");
+            System.out.println("1 - Facile");
+            System.out.println("2 - Normal");
+            System.out.println("3 - Difficile");
+
+            choice = scanner.nextLine();
+
+            if (!choice.equals("1")
+                    && !choice.equals("2")
+                    && !choice.equals("3")) {
+
+                System.out.println("Choix invalide !");
+            }
+        }
+
+        switch (choice) {
+
+            case "1":
+                return Difficulty.EASY;
+
+            case "2":
+                return Difficulty.NORMAL;
+
+            case "3":
+                return Difficulty.HARD;
+
+            default:
+                throw new IllegalArgumentException("Difficulté inconnue");
+        }
     }
 }

@@ -3,12 +3,11 @@ package fr.campus.dungeon.game;
 import fr.campus.dungeon.character.PlayerCharacter;
 import fr.campus.dungeon.character.Warrior;
 import fr.campus.dungeon.character.Wizard;
-import fr.campus.dungeon.enemy.Dragon;
 import fr.campus.dungeon.enemy.Enemy;
-import fr.campus.dungeon.enemy.Gobelin;
-import fr.campus.dungeon.enemy.Sorcier;
 import fr.campus.dungeon.event.EnemyEvent;
 import fr.campus.dungeon.menu.Menu;
+
+import java.util.ArrayList;
 
 
 public class Game {
@@ -17,6 +16,8 @@ public class Game {
     private PlayerCharacter character;
     private Board board;
     private final Dice dice = new Dice();
+    private GameConfiguration configuration;
+    private final EnemyGenerator enemyGenerator = new EnemyGenerator();
 
     public void start() {
         String choice = MENU.mainMenu();
@@ -31,11 +32,16 @@ public class Game {
         // ======================= GAME START ===========================
     private void startGame() {
         System.out.println("=== Création du personnage ===");
+
         character = createCharacter();
 
+        GameConfiguration.Difficulty difficulty = MENU.difficultyMenu();
+
+        configuration = new GameConfiguration(difficulty);
+
         board = new Board(64);
+
         initializeBoard();
-        //board.displayBoard();
 
         System.out.println("\n" + character);
 
@@ -54,9 +60,18 @@ public class Game {
             default -> throw new IllegalArgumentException("Classe inconnue");
         };
     }
-        //board (test méthode random plus tard)
         private void initializeBoard() {
-            placeEnemiesForTest();
+
+            ArrayList<Enemy> enemies = enemyGenerator.generateEnemies(configuration);
+
+            int position = 4;
+
+            for (Enemy enemy : enemies) {
+
+                board.placeEvent(position, new EnemyEvent(enemy));
+
+                position += 5;
+            }
         }
 
     private void movePlayer() {
@@ -140,7 +155,7 @@ public class Game {
 
         System.out.println(character);
     }
-    private void placeEnemiesForTest() {
+    /*private void placeEnemiesForTest() {
         board.placeEvent(4, new EnemyEvent(new Gobelin()));
         board.placeEvent(19, new EnemyEvent(new Sorcier()));
         board.placeEvent(49, new EnemyEvent(new Dragon()));
@@ -158,4 +173,6 @@ public class Game {
         board.placeEvent(20, new EnemyEvent(new Dragon()));
         board.placeEvent(21, new EnemyEvent(new Dragon()));
     }
+
+     */
 }
